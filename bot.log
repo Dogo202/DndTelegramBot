@@ -1558,3 +1558,252 @@ sqlite3.OperationalError: no such column: damage
 2025-11-27 14:47:41,852 | INFO    | aiogram.dispatcher | Polling stopped for bot @dndTimurBot id=8500394417 - 'DndBotTimur'
 2025-11-27 14:47:41,852 | INFO    | aiogram.dispatcher | Polling stopped
 2025-11-27 14:47:42,103 | INFO    | dnd_bot | Bot stopped
+2025-11-27 15:31:54,038 | DEBUG   | asyncio | Using selector: EpollSelector
+2025-11-27 15:31:54,038 | INFO    | dnd_bot | Init DB at: /home/timur/DndTelegramBot/dnd.db
+2025-11-27 15:31:54,039 | INFO    | dnd_bot | Bot starting...
+2025-11-27 15:31:54,039 | INFO    | aiogram.dispatcher | Start polling
+2025-11-27 15:31:54,381 | INFO    | aiogram.dispatcher | Run polling for bot @dndTimurBot id=8500394417 - 'DndBotTimur'
+2025-11-27 15:31:57,801 | INFO    | aiogram.event | Update id=589781890 is handled. Duration 333 ms by bot id=8500394417
+2025-11-27 15:32:06,747 | INFO    | aiogram.event | Update id=589781891 is handled. Duration 252 ms by bot id=8500394417
+2025-11-27 15:32:11,053 | INFO    | aiogram.event | Update id=589781892 is handled. Duration 142 ms by bot id=8500394417
+2025-11-27 15:32:13,549 | INFO    | aiogram.event | Update id=589781893 is handled. Duration 192 ms by bot id=8500394417
+2025-11-27 15:32:26,272 | INFO    | dnd_bot | start from Doge_tm (478122255)
+2025-11-27 15:32:26,404 | INFO    | aiogram.event | Update id=589781894 is handled. Duration 131 ms by bot id=8500394417
+2025-11-27 15:33:03,197 | WARNING | aiogram.dispatcher | Received SIGINT signal
+2025-11-27 15:33:03,198 | INFO    | aiogram.dispatcher | Polling stopped for bot @dndTimurBot id=8500394417 - 'DndBotTimur'
+2025-11-27 15:33:03,198 | INFO    | aiogram.dispatcher | Polling stopped
+2025-11-27 15:33:03,449 | INFO    | dnd_bot | Bot stopped
+2025-11-27 15:33:12,651 | DEBUG   | asyncio | Using selector: EpollSelector
+2025-11-27 15:33:12,651 | INFO    | dnd_bot | Init DB at: /home/timur/DndTelegramBot/dnd.db
+2025-11-27 15:33:12,652 | INFO    | dnd_bot | Bot starting...
+2025-11-27 15:33:12,652 | INFO    | aiogram.dispatcher | Start polling
+2025-11-27 15:33:12,985 | INFO    | aiogram.dispatcher | Run polling for bot @dndTimurBot id=8500394417 - 'DndBotTimur'
+2025-11-27 15:33:16,019 | INFO    | dnd_bot | start from rumba_cash (1071358944)
+2025-11-27 15:33:16,350 | INFO    | aiogram.event | Update id=589781895 is handled. Duration 331 ms by bot id=8500394417
+2025-11-27 15:33:17,748 | INFO    | aiogram.event | Update id=589781896 is handled. Duration 0 ms by bot id=8500394417
+2025-11-27 15:33:22,156 | INFO    | aiogram.event | Update id=589781897 is handled. Duration 116 ms by bot id=8500394417
+2025-11-27 15:34:48,158 | WARNING | aiogram.dispatcher | Received SIGINT signal
+2025-11-27 15:34:48,159 | INFO    | aiogram.dispatcher | Polling stopped for bot @dndTimurBot id=8500394417 - 'DndBotTimur'
+2025-11-27 15:34:48,159 | INFO    | aiogram.dispatcher | Polling stopped
+2025-11-27 15:34:48,411 | INFO    | dnd_bot | Bot stopped
+2025-11-27 15:34:50,292 | DEBUG   | asyncio | Using selector: EpollSelector
+2025-11-27 15:34:50,292 | INFO    | dnd_bot | Init DB at: /home/timur/DndTelegramBot/dnd.db
+2025-11-27 15:34:50,292 | INFO    | dnd_bot | Bot starting...
+2025-11-27 15:34:50,293 | INFO    | aiogram.dispatcher | Start polling
+2025-11-27 15:34:50,592 | INFO    | aiogram.dispatcher | Run polling for bot @dndTimurBot id=8500394417 - 'DndBotTimur'
+2025-11-27 15:34:55,501 | INFO    | dnd_bot | start from Doge_tm (478122255)
+2025-11-27 15:34:55,964 | INFO    | aiogram.event | Update id=589781898 is handled. Duration 462 ms by bot id=8500394417
+2025-11-27 15:34:57,190 | INFO    | aiogram.event | Update id=589781899 is handled. Duration 166 ms by bot id=8500394417
+2025-11-27 15:35:00,567 | INFO    | aiogram.event | Update id=589781900 is handled. Duration 232 ms by bot id=8500394417
+2025-11-27 15:35:03,529 | INFO    | aiogram.event | Update id=589781901 is handled. Duration 141 ms by bot id=8500394417
+2025-11-27 15:35:04,671 | INFO    | aiogram.event | Update id=589781902 is handled. Duration 156 ms by bot id=8500394417
+2025-11-27 15:35:10,740 | INFO    | aiogram.event | Update id=589781903 is handled. Duration 114 ms by bot id=8500394417
+2025-11-27 15:35:11,848 | INFO    | aiogram.event | Update id=589781904 is handled. Duration 239 ms by bot id=8500394417
+2025-11-27 15:35:18,293 | INFO    | aiogram.event | Update id=589781905 is handled. Duration 107 ms by bot id=8500394417
+2025-11-27 15:35:19,347 | INFO    | aiogram.event | Update id=589781906 is handled. Duration 126 ms by bot id=8500394417
+2025-11-27 15:35:20,218 | INFO    | aiogram.event | Update id=589781907 is handled. Duration 109 ms by bot id=8500394417
+2025-11-27 15:35:21,144 | INFO    | aiogram.event | Update id=589781908 is handled. Duration 128 ms by bot id=8500394417
+2025-11-27 15:36:30,924 | INFO    | aiogram.event | Update id=589781909 is handled. Duration 200 ms by bot id=8500394417
+2025-11-27 15:38:05,926 | WARNING | aiogram.dispatcher | Received SIGINT signal
+2025-11-27 15:38:05,927 | INFO    | aiogram.dispatcher | Polling stopped for bot @dndTimurBot id=8500394417 - 'DndBotTimur'
+2025-11-27 15:38:05,927 | INFO    | aiogram.dispatcher | Polling stopped
+2025-11-27 15:38:06,179 | INFO    | dnd_bot | Bot stopped
+2025-11-27 15:38:07,556 | DEBUG   | asyncio | Using selector: EpollSelector
+2025-11-27 15:38:07,556 | INFO    | dnd_bot | Init DB at: /home/timur/DndTelegramBot/dnd.db
+2025-11-27 15:38:07,556 | INFO    | dnd_bot | Bot starting...
+2025-11-27 15:38:07,557 | INFO    | aiogram.dispatcher | Start polling
+2025-11-27 15:38:07,899 | INFO    | aiogram.dispatcher | Run polling for bot @dndTimurBot id=8500394417 - 'DndBotTimur'
+2025-11-27 15:38:10,424 | INFO    | aiogram.event | Update id=589781910 is handled. Duration 421 ms by bot id=8500394417
+2025-11-27 15:38:12,305 | INFO    | aiogram.event | Update id=589781911 is handled. Duration 124 ms by bot id=8500394417
+2025-11-27 15:38:14,684 | INFO    | aiogram.event | Update id=589781912 is handled. Duration 202 ms by bot id=8500394417
+2025-11-27 15:38:18,159 | INFO    | aiogram.event | Update id=589781913 is handled. Duration 160 ms by bot id=8500394417
+2025-11-27 15:39:00,283 | WARNING | aiogram.dispatcher | Received SIGINT signal
+2025-11-27 15:39:00,284 | INFO    | aiogram.dispatcher | Polling stopped for bot @dndTimurBot id=8500394417 - 'DndBotTimur'
+2025-11-27 15:39:00,284 | INFO    | aiogram.dispatcher | Polling stopped
+2025-11-27 15:39:00,536 | INFO    | dnd_bot | Bot stopped
+2025-11-27 15:39:02,171 | DEBUG   | asyncio | Using selector: EpollSelector
+2025-11-27 15:39:02,172 | INFO    | dnd_bot | Init DB at: /home/timur/DndTelegramBot/dnd.db
+2025-11-27 15:39:02,172 | INFO    | dnd_bot | Bot starting...
+2025-11-27 15:39:02,172 | INFO    | aiogram.dispatcher | Start polling
+2025-11-27 15:39:02,496 | INFO    | aiogram.dispatcher | Run polling for bot @dndTimurBot id=8500394417 - 'DndBotTimur'
+2025-11-27 15:39:04,068 | INFO    | aiogram.event | Update id=589781914 is handled. Duration 456 ms by bot id=8500394417
+2025-11-27 15:39:05,413 | INFO    | aiogram.event | Update id=589781915 is handled. Duration 124 ms by bot id=8500394417
+2025-11-27 15:39:07,705 | INFO    | aiogram.event | Update id=589781916 is handled. Duration 118 ms by bot id=8500394417
+2025-11-27 15:39:26,617 | INFO    | aiogram.event | Update id=589781917 is handled. Duration 120 ms by bot id=8500394417
+2025-11-27 15:39:30,927 | INFO    | aiogram.event | Update id=589781918 is handled. Duration 134 ms by bot id=8500394417
+2025-11-27 15:39:59,678 | INFO    | aiogram.event | Update id=589781919 is handled. Duration 169 ms by bot id=8500394417
+2025-11-27 15:40:29,931 | INFO    | aiogram.event | Update id=589781920 is handled. Duration 147 ms by bot id=8500394417
+2025-11-27 15:40:40,830 | INFO    | aiogram.event | Update id=589781921 is handled. Duration 157 ms by bot id=8500394417
+2025-11-27 15:41:00,712 | INFO    | aiogram.event | Update id=589781922 is handled. Duration 123 ms by bot id=8500394417
+2025-11-27 15:41:15,830 | INFO    | aiogram.event | Update id=589781923 is handled. Duration 133 ms by bot id=8500394417
+2025-11-27 15:41:18,982 | INFO    | aiogram.event | Update id=589781924 is handled. Duration 123 ms by bot id=8500394417
+2025-11-27 15:41:20,865 | INFO    | aiogram.event | Update id=589781925 is handled. Duration 119 ms by bot id=8500394417
+2025-11-27 15:42:10,197 | INFO    | aiogram.event | Update id=589781926 is handled. Duration 165 ms by bot id=8500394417
+2025-11-27 15:42:24,627 | WARNING | aiogram.dispatcher | Received SIGINT signal
+2025-11-27 15:42:24,628 | INFO    | aiogram.dispatcher | Polling stopped for bot @dndTimurBot id=8500394417 - 'DndBotTimur'
+2025-11-27 15:42:24,628 | INFO    | aiogram.dispatcher | Polling stopped
+2025-11-27 15:42:24,880 | INFO    | dnd_bot | Bot stopped
+2025-11-27 15:44:16,044 | DEBUG   | asyncio | Using selector: EpollSelector
+2025-11-27 15:44:16,044 | INFO    | dnd_bot | Init DB at: /home/timur/DndTelegramBot/dnd.db
+2025-11-27 15:44:16,044 | INFO    | dnd_bot | Bot starting...
+2025-11-27 15:44:16,045 | INFO    | aiogram.dispatcher | Start polling
+2025-11-27 15:44:16,354 | INFO    | aiogram.dispatcher | Run polling for bot @dndTimurBot id=8500394417 - 'DndBotTimur'
+2025-11-27 15:44:16,466 | INFO    | aiogram.event | Update id=589781928 is handled. Duration 0 ms by bot id=8500394417
+2025-11-27 15:44:16,809 | INFO    | aiogram.event | Update id=589781927 is handled. Duration 344 ms by bot id=8500394417
+2025-11-27 15:44:18,082 | INFO    | aiogram.event | Update id=589781929 is handled. Duration 126 ms by bot id=8500394417
+2025-11-27 15:44:26,030 | INFO    | aiogram.event | Update id=589781930 is handled. Duration 123 ms by bot id=8500394417
+2025-11-27 15:44:35,582 | INFO    | aiogram.event | Update id=589781931 is handled. Duration 129 ms by bot id=8500394417
+2025-11-27 15:45:04,906 | WARNING | aiogram.dispatcher | Received SIGINT signal
+2025-11-27 15:45:04,906 | INFO    | aiogram.dispatcher | Polling stopped for bot @dndTimurBot id=8500394417 - 'DndBotTimur'
+2025-11-27 15:45:04,906 | INFO    | aiogram.dispatcher | Polling stopped
+2025-11-27 15:45:05,157 | INFO    | dnd_bot | Bot stopped
+2025-11-27 15:45:06,911 | DEBUG   | asyncio | Using selector: EpollSelector
+2025-11-27 15:45:06,911 | INFO    | dnd_bot | Init DB at: /home/timur/DndTelegramBot/dnd.db
+2025-11-27 15:45:06,912 | INFO    | dnd_bot | Bot starting...
+2025-11-27 15:45:06,912 | INFO    | aiogram.dispatcher | Start polling
+2025-11-27 15:45:07,223 | INFO    | aiogram.dispatcher | Run polling for bot @dndTimurBot id=8500394417 - 'DndBotTimur'
+2025-11-27 15:46:18,188 | INFO    | dnd_bot | start from Doge_tm (478122255)
+2025-11-27 15:46:18,522 | INFO    | aiogram.event | Update id=589781932 is handled. Duration 334 ms by bot id=8500394417
+2025-11-27 15:46:20,143 | INFO    | aiogram.event | Update id=589781933 is handled. Duration 133 ms by bot id=8500394417
+2025-11-27 15:46:22,232 | INFO    | aiogram.event | Update id=589781934 is handled. Duration 129 ms by bot id=8500394417
+2025-11-27 15:46:24,678 | INFO    | aiogram.event | Update id=589781935 is handled. Duration 135 ms by bot id=8500394417
+2025-11-27 15:46:26,863 | WARNING | aiogram.dispatcher | Received SIGINT signal
+2025-11-27 15:46:26,863 | INFO    | aiogram.dispatcher | Polling stopped for bot @dndTimurBot id=8500394417 - 'DndBotTimur'
+2025-11-27 15:46:26,863 | INFO    | aiogram.dispatcher | Polling stopped
+2025-11-27 15:46:27,114 | INFO    | dnd_bot | Bot stopped
+2025-11-27 15:47:23,963 | DEBUG   | asyncio | Using selector: EpollSelector
+2025-11-27 15:47:23,964 | INFO    | dnd_bot | Init DB at: /home/timur/DndTelegramBot/dnd.db
+2025-11-27 15:47:23,964 | INFO    | dnd_bot | Bot starting...
+2025-11-27 15:47:23,964 | INFO    | aiogram.dispatcher | Start polling
+2025-11-27 15:47:24,276 | INFO    | aiogram.dispatcher | Run polling for bot @dndTimurBot id=8500394417 - 'DndBotTimur'
+2025-11-27 15:47:28,403 | INFO    | dnd_bot | start from Doge_tm (478122255)
+2025-11-27 15:47:28,806 | INFO    | aiogram.event | Update id=589781936 is handled. Duration 403 ms by bot id=8500394417
+2025-11-27 15:47:30,331 | INFO    | aiogram.event | Update id=589781937 is handled. Duration 119 ms by bot id=8500394417
+2025-11-27 15:47:31,218 | INFO    | aiogram.event | Update id=589781938 is handled. Duration 121 ms by bot id=8500394417
+2025-11-27 15:47:32,882 | INFO    | dnd_bot | ya zeliboba
+2025-11-27 15:47:32,883 | INFO    | dnd_bot | abiba
+2025-11-27 15:47:33,009 | INFO    | aiogram.event | Update id=589781939 is handled. Duration 127 ms by bot id=8500394417
+2025-11-27 15:47:36,898 | INFO    | dnd_bot | i'm here
+2025-11-27 15:47:36,899 | INFO    | dnd_bot | base npc attr 3
+2025-11-27 15:47:37,015 | INFO    | aiogram.event | Update id=589781940 is handled. Duration 116 ms by bot id=8500394417
+2025-11-27 15:47:43,354 | INFO    | aiogram.event | Update id=589781941 is handled. Duration 0 ms by bot id=8500394417
+2025-11-27 15:47:58,422 | INFO    | dnd_bot | start from rumba_cash (1071358944)
+2025-11-27 15:47:58,547 | INFO    | aiogram.event | Update id=589781942 is handled. Duration 125 ms by bot id=8500394417
+2025-11-27 15:48:01,086 | INFO    | aiogram.event | Update id=589781943 is handled. Duration 186 ms by bot id=8500394417
+2025-11-27 15:48:03,847 | INFO    | aiogram.event | Update id=589781944 is handled. Duration 256 ms by bot id=8500394417
+2025-11-27 15:48:07,080 | INFO    | aiogram.event | Update id=589781945 is handled. Duration 130 ms by bot id=8500394417
+2025-11-27 15:48:08,765 | INFO    | aiogram.event | Update id=589781946 is handled. Duration 170 ms by bot id=8500394417
+2025-11-27 15:48:12,497 | INFO    | aiogram.event | Update id=589781947 is handled. Duration 109 ms by bot id=8500394417
+2025-11-27 15:48:13,343 | INFO    | aiogram.event | Update id=589781948 is handled. Duration 121 ms by bot id=8500394417
+2025-11-27 15:48:15,143 | INFO    | dnd_bot | ya zeliboba
+2025-11-27 15:48:15,144 | INFO    | dnd_bot | abiba
+2025-11-27 15:48:15,252 | INFO    | aiogram.event | Update id=589781949 is handled. Duration 109 ms by bot id=8500394417
+2025-11-27 15:48:16,098 | INFO    | dnd_bot | i'm here
+2025-11-27 15:48:16,098 | INFO    | dnd_bot | base npc attr 3
+2025-11-27 15:48:16,220 | INFO    | aiogram.event | Update id=589781950 is handled. Duration 122 ms by bot id=8500394417
+2025-11-27 15:48:19,878 | INFO    | aiogram.event | Update id=589781951 is handled. Duration 109 ms by bot id=8500394417
+2025-11-27 15:48:21,024 | INFO    | aiogram.event | Update id=589781952 is handled. Duration 126 ms by bot id=8500394417
+2025-11-27 15:48:21,708 | INFO    | dnd_bot | ya zeliboba
+2025-11-27 15:48:21,843 | INFO    | aiogram.event | Update id=589781953 is handled. Duration 135 ms by bot id=8500394417
+2025-11-27 15:48:24,777 | INFO    | aiogram.event | Update id=589781954 is handled. Duration 140 ms by bot id=8500394417
+2025-11-27 15:48:34,984 | INFO    | aiogram.event | Update id=589781955 is handled. Duration 121 ms by bot id=8500394417
+2025-11-27 15:48:36,576 | INFO    | aiogram.event | Update id=589781956 is handled. Duration 150 ms by bot id=8500394417
+2025-11-27 15:48:51,746 | INFO    | aiogram.event | Update id=589781957 is handled. Duration 116 ms by bot id=8500394417
+2025-11-27 15:48:57,507 | INFO    | aiogram.event | Update id=589781958 is handled. Duration 157 ms by bot id=8500394417
+2025-11-27 15:48:59,373 | INFO    | aiogram.event | Update id=589781959 is handled. Duration 133 ms by bot id=8500394417
+2025-11-27 15:49:05,098 | INFO    | aiogram.event | Update id=589781960 is handled. Duration 172 ms by bot id=8500394417
+2025-11-27 15:49:07,855 | INFO    | aiogram.event | Update id=589781961 is handled. Duration 111 ms by bot id=8500394417
+2025-11-27 15:49:46,851 | INFO    | aiogram.event | Update id=589781962 is handled. Duration 159 ms by bot id=8500394417
+2025-11-27 15:49:48,161 | INFO    | aiogram.event | Update id=589781963 is handled. Duration 181 ms by bot id=8500394417
+2025-11-27 15:49:50,482 | INFO    | aiogram.event | Update id=589781964 is handled. Duration 116 ms by bot id=8500394417
+2025-11-27 15:49:54,686 | INFO    | aiogram.event | Update id=589781965 is handled. Duration 158 ms by bot id=8500394417
+2025-11-27 15:50:08,475 | INFO    | aiogram.event | Update id=589781966 is handled. Duration 171 ms by bot id=8500394417
+2025-11-27 15:50:09,359 | INFO    | aiogram.event | Update id=589781967 is handled. Duration 120 ms by bot id=8500394417
+2025-11-27 15:50:10,442 | INFO    | aiogram.event | Update id=589781968 is handled. Duration 128 ms by bot id=8500394417
+2025-11-27 15:50:16,245 | INFO    | aiogram.event | Update id=589781969 is handled. Duration 150 ms by bot id=8500394417
+2025-11-27 15:50:30,037 | INFO    | aiogram.event | Update id=589781970 is handled. Duration 124 ms by bot id=8500394417
+2025-11-27 15:50:32,121 | INFO    | aiogram.event | Update id=589781971 is handled. Duration 129 ms by bot id=8500394417
+2025-11-27 15:50:34,766 | INFO    | aiogram.event | Update id=589781972 is handled. Duration 130 ms by bot id=8500394417
+2025-11-27 15:50:37,321 | INFO    | aiogram.event | Update id=589781973 is handled. Duration 122 ms by bot id=8500394417
+2025-11-27 15:51:01,315 | INFO    | aiogram.event | Update id=589781974 is handled. Duration 113 ms by bot id=8500394417
+2025-11-27 15:51:02,998 | INFO    | aiogram.event | Update id=589781975 is handled. Duration 123 ms by bot id=8500394417
+2025-11-27 15:55:30,844 | INFO    | aiogram.event | Update id=589781976 is handled. Duration 122 ms by bot id=8500394417
+2025-11-27 15:55:32,366 | INFO    | aiogram.event | Update id=589781977 is handled. Duration 120 ms by bot id=8500394417
+2025-11-27 15:55:45,461 | INFO    | aiogram.event | Update id=589781978 is handled. Duration 120 ms by bot id=8500394417
+2025-11-27 15:55:46,336 | INFO    | aiogram.event | Update id=589781979 is handled. Duration 120 ms by bot id=8500394417
+2025-11-27 16:02:27,206 | WARNING | aiogram.dispatcher | Received SIGINT signal
+2025-11-27 16:02:27,207 | INFO    | aiogram.dispatcher | Polling stopped for bot @dndTimurBot id=8500394417 - 'DndBotTimur'
+2025-11-27 16:02:27,207 | INFO    | aiogram.dispatcher | Polling stopped
+2025-11-27 16:02:27,457 | INFO    | dnd_bot | Bot stopped
+2025-11-27 16:02:28,958 | DEBUG   | asyncio | Using selector: EpollSelector
+2025-11-27 16:02:28,958 | INFO    | dnd_bot | Init DB at: /home/timur/DndTelegramBot/dnd.db
+2025-11-27 16:02:28,959 | INFO    | dnd_bot | Bot starting...
+2025-11-27 16:02:28,959 | INFO    | aiogram.dispatcher | Start polling
+2025-11-27 16:02:29,357 | INFO    | aiogram.dispatcher | Run polling for bot @dndTimurBot id=8500394417 - 'DndBotTimur'
+2025-11-27 16:03:14,089 | INFO    | aiogram.event | Update id=589781980 is handled. Duration 518 ms by bot id=8500394417
+2025-11-27 16:03:45,912 | INFO    | aiogram.event | Update id=589781981 is handled. Duration 125 ms by bot id=8500394417
+2025-11-27 16:03:47,432 | INFO    | aiogram.event | Update id=589781982 is handled. Duration 129 ms by bot id=8500394417
+2025-11-27 16:24:26,979 | WARNING | aiogram.dispatcher | Received SIGINT signal
+2025-11-27 16:24:26,979 | INFO    | aiogram.dispatcher | Polling stopped for bot @dndTimurBot id=8500394417 - 'DndBotTimur'
+2025-11-27 16:24:26,979 | INFO    | aiogram.dispatcher | Polling stopped
+2025-11-27 16:24:27,230 | INFO    | dnd_bot | Bot stopped
+2025-11-27 16:24:28,669 | DEBUG   | asyncio | Using selector: EpollSelector
+2025-11-27 16:24:28,669 | INFO    | dnd_bot | Init DB at: /home/timur/DndTelegramBot/dnd.db
+2025-11-27 16:24:28,670 | INFO    | dnd_bot | Bot starting...
+2025-11-27 16:24:28,670 | INFO    | aiogram.dispatcher | Start polling
+2025-11-27 16:24:29,059 | INFO    | aiogram.dispatcher | Run polling for bot @dndTimurBot id=8500394417 - 'DndBotTimur'
+2025-11-27 16:24:30,979 | INFO    | aiogram.event | Update id=589781983 is handled. Duration 309 ms by bot id=8500394417
+2025-11-27 16:24:32,846 | INFO    | aiogram.event | Update id=589781984 is handled. Duration 155 ms by bot id=8500394417
+2025-11-27 16:26:54,348 | WARNING | aiogram.dispatcher | Received SIGINT signal
+2025-11-27 16:26:54,349 | INFO    | aiogram.dispatcher | Polling stopped for bot @dndTimurBot id=8500394417 - 'DndBotTimur'
+2025-11-27 16:26:54,349 | INFO    | aiogram.dispatcher | Polling stopped
+2025-11-27 16:26:54,601 | INFO    | dnd_bot | Bot stopped
+2025-11-27 16:26:56,243 | DEBUG   | asyncio | Using selector: EpollSelector
+2025-11-27 16:26:56,243 | INFO    | dnd_bot | Init DB at: /home/timur/DndTelegramBot/dnd.db
+2025-11-27 16:26:56,244 | INFO    | dnd_bot | Bot starting...
+2025-11-27 16:26:56,244 | INFO    | aiogram.dispatcher | Start polling
+2025-11-27 16:26:56,624 | INFO    | aiogram.dispatcher | Run polling for bot @dndTimurBot id=8500394417 - 'DndBotTimur'
+2025-11-27 16:26:59,503 | INFO    | aiogram.event | Update id=589781985 is handled. Duration 338 ms by bot id=8500394417
+2025-11-27 16:27:00,816 | INFO    | dnd_bot | weapon imeetsa
+2025-11-27 16:27:00,817 | INFO    | dnd_bot | weapon imeetsa
+2025-11-27 16:27:00,817 | INFO    | dnd_bot | armor -1
+2025-11-27 16:27:00,817 | INFO    | dnd_bot | weapon -1
+2025-11-27 16:27:00,936 | INFO    | aiogram.event | Update id=589781986 is handled. Duration 122 ms by bot id=8500394417
+2025-11-27 16:27:35,442 | WARNING | aiogram.dispatcher | Received SIGINT signal
+2025-11-27 16:27:35,443 | INFO    | aiogram.dispatcher | Polling stopped for bot @dndTimurBot id=8500394417 - 'DndBotTimur'
+2025-11-27 16:27:35,444 | INFO    | aiogram.dispatcher | Polling stopped
+2025-11-27 16:27:35,695 | INFO    | dnd_bot | Bot stopped
+2025-11-27 16:27:36,860 | DEBUG   | asyncio | Using selector: EpollSelector
+2025-11-27 16:27:36,860 | INFO    | dnd_bot | Init DB at: /home/timur/DndTelegramBot/dnd.db
+2025-11-27 16:27:36,860 | INFO    | dnd_bot | Bot starting...
+2025-11-27 16:27:36,860 | INFO    | aiogram.dispatcher | Start polling
+2025-11-27 16:27:37,176 | INFO    | aiogram.dispatcher | Run polling for bot @dndTimurBot id=8500394417 - 'DndBotTimur'
+2025-11-27 16:27:38,460 | INFO    | aiogram.event | Update id=589781987 is handled. Duration 343 ms by bot id=8500394417
+2025-11-27 16:27:39,666 | INFO    | dnd_bot | weapon imeetsa 2
+2025-11-27 16:27:39,667 | INFO    | dnd_bot | armor imeetsa 2
+2025-11-27 16:27:39,667 | INFO    | dnd_bot | armor -1
+2025-11-27 16:27:39,667 | INFO    | dnd_bot | weapon -1
+2025-11-27 16:27:39,817 | INFO    | aiogram.event | Update id=589781988 is handled. Duration 151 ms by bot id=8500394417
+2025-11-27 16:28:10,283 | WARNING | aiogram.dispatcher | Received SIGINT signal
+2025-11-27 16:28:10,284 | INFO    | aiogram.dispatcher | Polling stopped for bot @dndTimurBot id=8500394417 - 'DndBotTimur'
+2025-11-27 16:28:10,284 | INFO    | aiogram.dispatcher | Polling stopped
+2025-11-27 16:28:10,536 | INFO    | dnd_bot | Bot stopped
+2025-11-27 16:28:12,194 | DEBUG   | asyncio | Using selector: EpollSelector
+2025-11-27 16:28:12,194 | INFO    | dnd_bot | Init DB at: /home/timur/DndTelegramBot/dnd.db
+2025-11-27 16:28:12,194 | INFO    | dnd_bot | Bot starting...
+2025-11-27 16:28:12,194 | INFO    | aiogram.dispatcher | Start polling
+2025-11-27 16:28:12,527 | INFO    | aiogram.dispatcher | Run polling for bot @dndTimurBot id=8500394417 - 'DndBotTimur'
+2025-11-27 16:28:14,576 | INFO    | aiogram.event | Update id=589781989 is handled. Duration 357 ms by bot id=8500394417
+2025-11-27 16:28:16,083 | INFO    | dnd_bot | weapon imeetsa 2
+2025-11-27 16:28:16,084 | INFO    | dnd_bot | armor 0
+2025-11-27 16:28:16,085 | INFO    | dnd_bot | weapon -1
+2025-11-27 16:28:16,210 | INFO    | aiogram.event | Update id=589781990 is handled. Duration 126 ms by bot id=8500394417
+2025-11-27 16:29:17,966 | WARNING | aiogram.dispatcher | Received SIGINT signal
+2025-11-27 16:29:17,967 | INFO    | aiogram.dispatcher | Polling stopped for bot @dndTimurBot id=8500394417 - 'DndBotTimur'
+2025-11-27 16:29:17,967 | INFO    | aiogram.dispatcher | Polling stopped
+2025-11-27 16:29:18,219 | INFO    | dnd_bot | Bot stopped
+2025-11-27 16:29:19,802 | DEBUG   | asyncio | Using selector: EpollSelector
+2025-11-27 16:29:19,802 | INFO    | dnd_bot | Init DB at: /home/timur/DndTelegramBot/dnd.db
+2025-11-27 16:29:19,803 | INFO    | dnd_bot | Bot starting...
+2025-11-27 16:29:19,803 | INFO    | aiogram.dispatcher | Start polling
+2025-11-27 16:29:20,110 | INFO    | aiogram.dispatcher | Run polling for bot @dndTimurBot id=8500394417 - 'DndBotTimur'
