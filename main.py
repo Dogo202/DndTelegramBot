@@ -98,6 +98,18 @@ def init_db():
         hp INTEGER
     )
     """)
+    # npc table
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS npc (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            attrs TEXT NOT NULL,         -- json
+            weapon_id INTEGER,
+            armor_id INTEGER,
+            hp INTEGER NOT NULL,
+            in_combat INTEGER NOT NULL DEFAULT 0
+        )
+        """)
     c.commit()
     c.close()
     seed_stores_and_items_if_empty()
@@ -182,6 +194,89 @@ def migrate_characters_defaults():
     c.commit()
     c.close()
 
+# ---------- NPC HELPERS ----------
+def create_npc(name: str, attrs: Dict[str,int], weapon_id: Optional[int], armor_id: Optional[int], hp: int, in_combat: int = 0, damage: int = 0):
+    c = conn(); cur = c.cursor()
+    cur.execute("""
+        INSERT INTO npc (name, attrs, weapon_id, armor_id, hp, in_combat, damage)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+    """, (name, json.dumps(attrs, ensure_ascii=False), weapon_id, armor_id, hp, int(in_combat), damage))
+    c.commit(); c.close()
+
+def load_npc_full(npc_id: int) -> Optional[Dict[str,Any]]:
+    c = conn(); cur = c.cursor()
+    cur.execute("SELECT id, name, attrs, weapon_id, armor_id, hp, in_combat FROM npc WHERE id = ?", (npc_id,))
+    row = cur.fetchone(); c.close()
+    if not row: return None
+    _id, name, attrs_json, weapon_id, armor_id, hp, in_combat = row
+    try:
+        attrs = json.loads(attrs_json or "{}")
+    except Exception:
+        attrs = {}
+    weapon = get_item_by_id(weapon_id) if weapon_id else None
+    armor = get_item_by_id(armor_id) if armor_id else None
+    return {
+        "id": _id, "name": name, "attrs": attrs,
+        "weapon_id": weapon_id, "weapon": weapon,
+        "armor_id": armor_id, "armor": armor,
+        "hp": hp, "in_combat": bool(in_combat)
+    }
+
+def get_npcs_in_combat() -> List[Dict[str,Any]]:
+    c = conn(); cur = c.cursor()
+    cur.execute("SELECT id FROM npc WHERE in_combat=1")
+    rows = cur.fetchall(); c.close()
+    return [load_npc_full(r[0]) for r in rows]
+
+def set_npc_in_combat(npc_id: int, val: bool):
+    c = conn(); cur = c.cursor()
+    cur.execute("UPDATE npc SET in_combat = ? WHERE id = ?", (1 if val else 0, npc_id))
+    c.commit(); c.close()
+
+def apply_damage_to_npc(npc_id: int, incoming_dmg: int) -> Dict[str,Any]:
+    """
+    Вычитает броню NPC и уменьшает hp. Возвращает dict с keys: effective, new_hp, armor_val, was_killed
+    """
+    npc = load_npc_full(npc_id)
+    if not npc:
+        raise ValueError("NPC not found")
+    armor_val = 0
+    if npc.get("armor_id"):
+        arm = get_item_by_id(npc["armor_id"])
+        if arm:
+            armor_val = int(arm.get("armor") or 0)
+    effective = max(0, int(incoming_dmg) - armor_val)
+    new_hp = max(0, int(npc["hp"]) - effective)
+    c = conn(); cur = c.cursor()
+    cur.execute("UPDATE npc SET hp = ? WHERE id = ?", (new_hp, npc_id))
+    c.commit(); c.close()
+    return {"effective": effective, "new_hp": new_hp, "armor": armor_val, "was_killed": new_hp == 0}
+
+def npc_attack_player(npc_id: int, target_user_id: int) -> Dict[str,Any]:
+    npc = load_npc_full(npc_id)
+    if not npc:
+        raise ValueError("NPC not found")
+    weapon_bonus = 0
+    if npc.get("weapon"):
+        weapon_bonus = int(npc["weapon"].get("damage") or 0)
+    roll = random.randint(1,10)
+    dmg = roll + weapon_bonus + npc.get("damage",0)
+    # target player's armor
+    target = load_character_full(target_user_id)
+    if not target:
+        raise ValueError("Target not found")
+    armor_val = 0
+    if target.get("armor_id"):
+        arm = get_item_by_id(target["armor_id"])
+        if arm:
+            armor_val = int(arm.get("armor") or 0)
+    effective = max(0, dmg - armor_val)
+    new_hp = max(0, target.get("hp",0) - effective)
+    c = conn(); cur = c.cursor()
+    cur.execute("UPDATE characters SET hp = ? WHERE user_id = ?", (new_hp, target_user_id))
+    c.commit(); c.close()
+    return {"roll": roll, "base_dmg": dmg, "armor": armor_val, "effective": effective, "new_hp": new_hp}
+
 
 # ====== CHARACTER HELPERS ======
 def save_character_full(user_id: int, username: str, race: str, cls: str, attrs: Dict[str,int],
@@ -192,6 +287,8 @@ def save_character_full(user_id: int, username: str, race: str, cls: str, attrs:
         strength = attrs.get("сила", 0)
         race_bonus = RACE_BONUSES[race]["сила"]
         hp = round((strength + race_bonus) * 2.2)
+        if hp < 10:
+            hp = 10
     c = conn()
     cur = c.cursor()
     cur.execute("""
@@ -463,6 +560,8 @@ def main_menu_keyboard(user_id: int, chat_type: str) -> ReplyKeyboardMarkup:
         base.append(KeyboardButton(text="Товары"))
         base.append(KeyboardButton(text="Испытание"))
         base.append(KeyboardButton(text="Урон"))
+        if user_id == ADMIN_ID:
+            base.append(KeyboardButton(text="Мобы"))
     rows = chunked_list(base, 2)
     return ReplyKeyboardMarkup(keyboard=rows, resize_keyboard=True, one_time_keyboard=False)
 
@@ -470,7 +569,9 @@ def main_menu_keyboard(user_id: int, chat_type: str) -> ReplyKeyboardMarkup:
 # ====== SESSIONS ======
 CREATION_SESSIONS: Dict[int, Dict[str, Any]] = {}
 EQUIP_SESSIONS: Dict[int, Dict[str, Any]] = {}
-GM_SESSIONS: Dict[int, Dict[str, Any]] = {}  # key: admin_id -> session data
+GM_SESSIONS: Dict[int, Dict[str, Any]] = {}
+COMBAT_SESSIONS: Dict[int, Dict[str, Any]] = {}
+GM_COMBAT_SESSIONS: Dict[int, Dict[str, Any]] = {}
 
 # ====== Aiogram init ======
 bot = Bot(token=TOKEN)
@@ -480,10 +581,15 @@ dp = Dispatcher()
 @dp.message(Command(commands=["start"]))
 async def cmd_start(message: Message):
     logger.info("start from %s (%s)", message.from_user.username, message.from_user.id)
-    await message.answer(
-        "Привет! DnD бот.\nСоздать персонажа — /create\nПоказать персонажа — /show\nМагазин — /shop\nЭкипировка — /equip",
+    if message.chat.type == "private":
+        await message.answer(
+        "Привет! DnD бот.\nСоздать персонажа — /create\nПоказать персонажа — /show\nЭкипировка — /equip",
         reply_markup=main_menu_keyboard(message.from_user.id,message.chat.type)
-    )
+        )
+    else:
+        await message.answer(
+            "Привет! DnD бот.\nПоказать персонажа — /show\nТовары — /shop\nУрон — /attack ",
+            reply_markup=main_menu_keyboard(message.from_user.id, message.chat.type))
 
 @dp.message(Command(commands=["create"]))
 async def cmd_create(message: Message):
@@ -565,6 +671,8 @@ async def cmd_shop(message: Message):
 
 @dp.message(Command(commands=["equip"]))
 async def cmd_equip(message: Message):
+    if message.chat.type != "private":
+        return
     user_id = message.from_user.id
     char = load_character_full(user_id)
     if not char:
@@ -577,16 +685,15 @@ async def cmd_equip(message: Message):
 @dp.message(Command(commands=["attack"]))
 async def cmd_attack(message: Message):
     user_id = message.from_user.id
-    char = load_character_full(user_id)
-    if not char:
-        await message.answer("Персонаж не найден.")
+    npcs = get_npcs_in_combat()
+    if not npcs:
+        await message.answer("Сейчас нет мобов в бою.", reply_markup=main_menu_keyboard(user_id,message.chat.type))
         return
-    weapon_name = char.get("weapon")
-    weapon = get_item_by_name(weapon_name) if weapon_name else None
-    weapon_bonus = weapon["damage"] if weapon else 0
-    roll = random.randint(1,8)
-    total = roll + weapon_bonus
-    await message.answer(f"🎲 Брошен d8: {roll} + оружие {weapon_bonus} = {total}")
+    names = [n["name"] for n in npcs]
+    # сохраним мап в сессии для дальнейшего выбора
+    COMBAT_SESSIONS[user_id] = {"step": "player_choose_npc", "npcs": {n["name"]: n["id"] for n in npcs}}
+    await message.answer("Выберите моба, которому нанеcёте урон:", reply_markup=make_keyboard_from_options(names, cols=2))
+    return
 
 @dp.message(Command(commands=["list"]))
 async def cmd_list(message: Message):
@@ -634,8 +741,7 @@ async def universal_handler(message: Message):
             return
 
         if text == "Урон" and message.chat.type in ("group", "supergroup"):
-            roll = random.randint(1, 10)
-            await message.answer(f"🎲 d10: {roll} — урон {roll}",reply_markup=main_menu_keyboard(user_id,message.chat.type))
+            await cmd_attack(message)
             return
 
         if text == "Испытание" and message.chat.type in ("group", "supergroup"):
@@ -659,6 +765,20 @@ async def universal_handler(message: Message):
                 f"Атрибут {text}: {base} (бонус {race_bonus:+d})\n"
                 f"Итого: {total}",reply_markup=main_menu_keyboard(user_id,message.chat.type)
             )
+            return
+
+        if text == "Мобы" and message.chat.type in ("group", "supergroup") and user_id == ADMIN_ID:
+            c = conn();
+            cur = c.cursor()
+            cur.execute("SELECT id, name FROM npc")
+            rows = cur.fetchall();
+            c.close()
+            if not rows:
+                await message.answer("Мобов нет.", reply_markup=main_menu_keyboard(user_id, message.chat.type));
+                return
+            labels = [r[1] for r in rows]
+            GM_COMBAT_SESSIONS[user_id] = {"step": "admin_choose_npc", "map": {r[1]: r[0] for r in rows}}
+            await message.answer("Выберите моба:", reply_markup=make_keyboard_from_options(labels, cols=2))
             return
 
         if text == "Создать персонажа":
@@ -763,6 +883,110 @@ async def universal_handler(message: Message):
                 CREATION_SESSIONS.pop(user_id, None)
                 await message.answer("Персонаж сохранён.", reply_markup=main_menu_keyboard(message.from_user.id,message.chat.type))
                 return
+
+        if user_id in COMBAT_SESSIONS and COMBAT_SESSIONS[user_id].get("step") == "player_choose_npc":
+            sel = text
+            m = COMBAT_SESSIONS[user_id]["npcs"]
+            if sel not in m:
+                await message.answer("Неверный выбор.", reply_markup=main_menu_keyboard(user_id, message.chat.type))
+                COMBAT_SESSIONS.pop(user_id, None);
+                return
+            npc_id = m[sel]
+            # compute player's damage
+            char = load_character_full(user_id)
+            if not char:
+                await message.answer("Персонаж не найден.")
+                COMBAT_SESSIONS.pop(user_id, None);
+                return
+            weapon_bonus = int(char.get("weapon_damage") or 0)
+            roll = random.randint(1, 10)
+            total = roll + weapon_bonus
+            res = apply_damage_to_npc(npc_id, total)
+            msg = f"🎲 d10: {roll} + оружие {weapon_bonus} = {total}\nБроня моба: {res['armor']} -> эффективный урон {res['effective']}. Осталось HP: {res['new_hp']}"
+            if res["was_killed"]:
+                msg += f"\n{sel} погиб."
+                set_npc_in_combat(npc_id, False)
+            await message.answer(msg, reply_markup=main_menu_keyboard(user_id, message.chat.type))
+            COMBAT_SESSIONS.pop(user_id, None)
+            return
+
+        if user_id in GM_COMBAT_SESSIONS and GM_COMBAT_SESSIONS[user_id].get("step") == "admin_choose_npc":
+            sel = text
+            mp = GM_COMBAT_SESSIONS[user_id]["map"]
+            if sel not in mp:
+                await message.answer("Неверный выбор.", reply_markup=main_menu_keyboard(user_id, message.chat.type))
+                GM_COMBAT_SESSIONS.pop(user_id, None);
+                return
+            npc_id = mp[sel]
+            GM_COMBAT_SESSIONS[user_id] = {"step": "admin_npc_actions", "npc_id": npc_id}
+            await message.answer("Действие:",
+                           reply_markup=make_keyboard_from_options(["Испытание", "Урон", "Отмена"], cols=2))
+            return
+
+        if user_id in GM_COMBAT_SESSIONS and GM_COMBAT_SESSIONS[user_id].get("step") == "admin_npc_actions":
+            action = text
+            if action == "Отмена":
+                GM_COMBAT_SESSIONS.pop(user_id, None);
+                await message.answer("Отменено.", reply_markup=main_menu_keyboard(user_id, message.chat.type));
+                return
+            npc_id = GM_COMBAT_SESSIONS[user_id]["npc_id"]
+            npc = load_npc_full(npc_id)
+            if action == "Испытание":
+                # показываем атрибуты кнопками (или спрашиваем какой атрибут)
+                GM_COMBAT_SESSIONS[user_id]["step"] = "admin_npc_choose_attr"
+                GM_COMBAT_SESSIONS[user_id]["npc_id"] = npc_id
+                await message.answer("Выберите атрибут для испытания:",
+                               reply_markup=make_keyboard_from_options(ATTRIBUTES, cols=3))
+                return
+            if action == "Урон":
+                # показ игроков-целей
+                players = load_all_characters()
+                if not players:
+                    await message.answer("Нет игроков.", reply_markup=main_menu_keyboard(user_id, message.chat.type));
+                    GM_COMBAT_SESSIONS.pop(user_id, None);
+                    return
+                labels = [f"{p['username']} ({p['user_id']})" for p in players]
+                GM_COMBAT_SESSIONS[user_id]["step"] = "admin_npc_choose_player"
+                GM_COMBAT_SESSIONS[user_id]["npc_id"] = npc_id
+                GM_COMBAT_SESSIONS[user_id]["players_map"] = {labels[i]: players[i]["user_id"] for i in range(len(players))}
+                await message.answer("Выберите игрока для атаки:", reply_markup=make_keyboard_from_options(labels, cols=2))
+                return
+
+        if user_id in GM_COMBAT_SESSIONS and GM_COMBAT_SESSIONS[user_id].get("step") == "admin_npc_choose_attr":
+            attr = text
+            if attr not in ATTRIBUTES:
+                await message.answer("Неверный атрибут.", reply_markup=main_menu_keyboard(user_id, message.chat.type))
+                GM_COMBAT_SESSIONS.pop(user_id, None);
+                return
+            npc_id = GM_COMBAT_SESSIONS[user_id]["npc_id"]
+            npc = load_npc_full(npc_id)
+            base = int(npc["attrs"].get(attr, 0))
+            roll = random.randint(1, 20)
+            total = roll + base
+            await message.answer(f"NPC {npc['name']} бросок d20: {roll}\nАтрибут {attr}: {base}\nИтого: {total}",
+                           reply_markup=main_menu_keyboard(user_id, message.chat.type))
+            GM_COMBAT_SESSIONS.pop(user_id, None);
+            return
+
+        if user_id in GM_COMBAT_SESSIONS and GM_COMBAT_SESSIONS[user_id].get("step") == "admin_npc_choose_player":
+            sel = text
+            pm = GM_COMBAT_SESSIONS[user_id].get("players_map", {})
+            if sel not in pm:
+                await message.answer("Неверный игрок.", reply_markup=main_menu_keyboard(user_id, message.chat.type));
+                GM_COMBAT_SESSIONS.pop(user_id, None);
+                return
+            target_id = pm[sel]
+            npc_id = GM_COMBAT_SESSIONS[user_id]["npc_id"]
+            res = npc_attack_player(npc_id, target_id)
+            target = load_character_full(target_id)
+            npc = load_npc_full(npc_id)
+            await message.answer(
+                f"NPC {npc['name']} атаковал {target['username']}: d10 {res['roll']} -> базовый урон {res['base_dmg']}. "
+                f"Броня цели {res['armor']} -> эффективный урон {res['effective']}. HP цели: {res['new_hp']}",
+                reply_markup=main_menu_keyboard(user_id, message.chat.type)
+            )
+            GM_COMBAT_SESSIONS.pop(user_id, None)
+            return
 
         # EQUIP flow
         if user_id in EQUIP_SESSIONS:
@@ -951,7 +1175,11 @@ async def universal_handler(message: Message):
                             await message.answer("Игрок не найден.", reply_markup=main_menu_keyboard(message.from_user.id,message.chat.type))
                             GM_SESSIONS.pop(user_id, None)
                             return
-                        max_hp = round(char["attrs"].get("сила",0)*2.2)
+                        strength = char["attrs"].get("сила", 0)
+                        race_bonus_strength = int(RACE_BONUSES.get(char.get('race'), {}).get("сила", 0) or 0)
+                        max_hp = round((strength + race_bonus_strength) * 2.2)
+                        if max_hp < 5:
+                            max_hp = 10
                         c = conn()
                         cur = c.cursor()
                         cur.execute("UPDATE characters SET hp = ? WHERE user_id = ?", (max_hp, target_id))
@@ -1033,7 +1261,7 @@ async def universal_handler(message: Message):
                         return
                     strength = char["attrs"].get("сила",0)
                     race_bonus_strength = int(RACE_BONUSES.get(char.get('race'), {}).get("сила", 0) or 0)
-                    max_hp = ceil((strength + race_bonus_strength) * 2.2)
+                    max_hp = round((strength + race_bonus_strength) * 2.2)
                     # max_hp = round(char["attrs"].get("сила",0)*2.2)
                     logger.info("heal=%s| Hp=%s",heal,char.get("hp",0))
                     new_hp = min(max_hp, char.get("hp",0) + heal)
