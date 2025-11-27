@@ -1007,7 +1007,7 @@ async def universal_handler(message: Message):
                     await message.answer(f"Вы не потратили все очки (осталось {leftover}). Начинаем заново. Сколько в {first_attr}?", reply_markup=make_keyboard_numbers(session["remaining"], 0))
                     return
                 final_attrs = {a: session["allocs"].get(a, 0) for a in ATTRIBUTES}
-                starter_inventory = [1,9]
+                starter_inventory = []
                 save_character_full(user_id, message.from_user.username or message.from_user.full_name,
                                     session["race"], session["class"], final_attrs,
                                     inventory=starter_inventory, weapon=None, armor=None, gold=START_GOLD)
